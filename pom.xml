@@ -8,8 +8,8 @@
 		<version>3.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mtorg</groupId>
-	<artifactId>crm</artifactId>
+	<groupId>com.shop</groupId>
+	<artifactId>app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shop</name>
 	<description>SHOP workspace</description>
