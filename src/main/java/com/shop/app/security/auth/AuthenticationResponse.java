@@ -1,4 +1,4 @@
-package com.mtorg.crm.security.auth;
+package com.shop.app.security.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;

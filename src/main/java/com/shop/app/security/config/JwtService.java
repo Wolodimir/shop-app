@@ -1,4 +1,4 @@
-package com.mtorg.crm.security.config;
+package com.shop.app.security.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

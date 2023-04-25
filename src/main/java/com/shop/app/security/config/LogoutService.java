@@ -1,6 +1,6 @@
-package com.mtorg.crm.security.config;
+package com.shop.app.security.config;
 
-import com.mtorg.crm.security.token.TokenRepository;
+import com.shop.app.security.token.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;

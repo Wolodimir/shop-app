@@ -1,4 +1,4 @@
-package com.mtorg.crm;
+package com.shop.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

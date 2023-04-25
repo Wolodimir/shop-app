@@ -1,6 +1,6 @@
-package com.mtorg.crm.security.token;
+package com.shop.app.security.token;
 
-import com.mtorg.crm.security.user.User;
+import com.shop.app.security.user.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 

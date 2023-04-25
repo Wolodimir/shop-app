@@ -1,4 +1,4 @@
-package com.mtorg.crm.security.user;
+package com.shop.app.security.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

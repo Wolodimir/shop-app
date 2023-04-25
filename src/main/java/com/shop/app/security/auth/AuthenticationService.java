@@ -1,22 +1,19 @@
-package com.mtorg.crm.security.auth;
+package com.shop.app.security.auth;
 
-import com.mtorg.crm.security.token.Token;
+import com.shop.app.security.token.Token;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mtorg.crm.security.config.JwtService;
-import com.mtorg.crm.security.token.TokenRepository;
-import com.mtorg.crm.security.token.TokenType;
-import com.mtorg.crm.security.user.Role;
-import com.mtorg.crm.security.user.UserRepository;
+import com.shop.app.security.config.JwtService;
+import com.shop.app.security.token.TokenRepository;
+import com.shop.app.security.token.TokenType;
+import com.shop.app.security.user.Role;
+import com.shop.app.security.user.UserRepository;
+import com.shop.app.security.user.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.mtorg.crm.security.user.User;
-
-import java.io.IOException;
 
 @Service
 public class AuthenticationService {

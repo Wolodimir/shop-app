@@ -1,4 +1,4 @@
-package com.mtorg.crm.security.config;
+package com.shop.app.security.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

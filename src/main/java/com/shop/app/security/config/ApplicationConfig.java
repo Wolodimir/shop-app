@@ -1,6 +1,6 @@
-package com.mtorg.crm.security.config;
+package com.shop.app.security.config;
 
-import com.mtorg.crm.security.user.UserRepository;
+import com.shop.app.security.user.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

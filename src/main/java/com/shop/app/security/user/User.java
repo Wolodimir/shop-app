@@ -1,6 +1,6 @@
-package com.mtorg.crm.security.user;
+package com.shop.app.security.user;
 
-import com.mtorg.crm.security.token.Token;
+import com.shop.app.security.token.Token;
 import jakarta.persistence.*;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;

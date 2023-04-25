@@ -1,4 +1,4 @@
-package com.mtorg.crm.api;
+package com.shop.app.api;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
