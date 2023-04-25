@@ -6,21 +6,21 @@ import lombok.Builder;
 @Builder
 public class AuthenticationResponse {
 
-  @JsonProperty("access_token")
-  private String accessToken;
+    @JsonProperty("access_token")
+    private String accessToken;
 
-  public AuthenticationResponse() {
-  }
+    public AuthenticationResponse() {
+    }
 
-  public AuthenticationResponse(String accessToken) {
-    this.accessToken = accessToken;
-  }
+    public AuthenticationResponse(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
-  public String getAccessToken() {
-    return accessToken;
-  }
+    public String getAccessToken() {
+        return accessToken;
+    }
 
-  public void setAccessToken(String accessToken) {
-    this.accessToken = accessToken;
-  }
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 }
