@@ -1,12 +1,15 @@
 package com.shop.app.security.auth;
 
+import jakarta.validation.constraints.*;
 import lombok.Builder;
 
 @Builder
 public class AuthenticationRequest {
-
+    @Email
     private String email;
-    String password;
+    @NotBlank
+    @Size(min = 8, max = 20)
+    private String password;
 
     public AuthenticationRequest() {
     }
