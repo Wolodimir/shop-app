@@ -12,14 +12,13 @@ import java.util.List;
 
 @Builder
 @Entity
-@Table(name = "_user")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue
     private Integer id;
-    private String firstname;
-    private String lastname;
+    private String nickname;
     private String email;
     private String password;
 
@@ -67,10 +66,9 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Integer id, String firstname, String lastname, String email, String password, Role role, List<Token> tokens) {
+    public User(Integer id, String nickname, String email, String password, Role role, List<Token> tokens) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.nickname = nickname;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -85,20 +83,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public void setUsername(String nickname) {
+        this.nickname = nickname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public String getNickname() {
+        return nickname;
     }
 
     public String getEmail() {
