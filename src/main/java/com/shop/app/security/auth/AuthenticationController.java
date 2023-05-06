@@ -28,13 +28,15 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request,
+                                                                HttpServletResponse httpServletResponse) {
         AuthenticationResponse response = service.authenticate(request);
         Cookie cookie = new Cookie("Set-Cookie", response.getAccessToken());
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setMaxAge(Duration.of(1, ChronoUnit.DAYS).toSecondsPart());
         cookie.setPath("/");
+        httpServletResponse.addCookie(cookie);
         return ResponseEntity.ok(response);
     }
 }
