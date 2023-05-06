@@ -1,11 +1,15 @@
 package com.shop.app.security.auth;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,6 +29,12 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request) {
-        return ResponseEntity.ok(service.authenticate(request));
+        AuthenticationResponse response = service.authenticate(request);
+        Cookie cookie = new Cookie("Set-Cookie", response.getAccessToken());
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setMaxAge(Duration.of(1, ChronoUnit.DAYS).toSecondsPart());
+        cookie.setPath("/");
+        return ResponseEntity.ok(response);
     }
 }
