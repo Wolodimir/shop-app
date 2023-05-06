@@ -2,7 +2,6 @@ package com.shop.app.security.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
@@ -10,10 +9,7 @@ import lombok.Builder;
 public class RegisterRequest {
     @NotBlank
     @Size(min = 2,max = 20)
-    private String firstname;
-    @NotBlank
-    @Size(min = 2,max = 20)
-    private String lastname;
+    private String username;
     @Email
     private String email;
     @NotBlank
@@ -23,27 +19,18 @@ public class RegisterRequest {
     public RegisterRequest() {
     }
 
-    public RegisterRequest(String firstname, String lastname, String email, String password) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public RegisterRequest(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
