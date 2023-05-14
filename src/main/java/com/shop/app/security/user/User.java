@@ -18,7 +18,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
-    private String nickname;
+    private String name;
     private String email;
     private String password;
 
@@ -66,9 +66,9 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Integer id, String nickname, String email, String password, Role role, List<Token> tokens) {
+    public User(Integer id, String name, String email, String password, Role role, List<Token> tokens) {
         this.id = id;
-        this.nickname = nickname;
+        this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -83,12 +83,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setUsername(String nickname) {
-        this.nickname = nickname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getName() {
+        return name;
     }
 
     public String getEmail() {

@@ -9,7 +9,7 @@ import lombok.Builder;
 public class RegisterRequest {
     @NotBlank
     @Size(min = 2,max = 20)
-    private String nickname;
+    private String name;
     @Email
     private String email;
     @NotBlank
@@ -19,18 +19,18 @@ public class RegisterRequest {
     public RegisterRequest() {
     }
 
-    public RegisterRequest(String nickname, String email, String password) {
-        this.nickname = nickname;
+    public RegisterRequest(String name, String email, String password) {
+        this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getName() {
+        return name;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

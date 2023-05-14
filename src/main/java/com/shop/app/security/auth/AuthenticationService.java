@@ -1,15 +1,12 @@
 package com.shop.app.security.auth;
 
 import com.shop.app.security.token.Token;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shop.app.security.config.JwtService;
 import com.shop.app.security.token.TokenRepository;
 import com.shop.app.security.token.TokenType;
 import com.shop.app.security.user.Role;
 import com.shop.app.security.user.UserRepository;
 import com.shop.app.security.user.User;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +32,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
-                .nickname(request.getNickname())
+                .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
