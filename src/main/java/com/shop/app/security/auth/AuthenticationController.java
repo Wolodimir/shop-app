@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true", origins = "http://127.0.0.1:5173/")
 public class AuthenticationController {
 
     private final AuthenticationService service;
@@ -34,8 +34,8 @@ public class AuthenticationController {
         cookie.setMaxAge(Duration.of(1, ChronoUnit.DAYS).toSecondsPart());
         cookie.setPath("/");
         httpServletResponse.addCookie(cookie);*/
-        String value = "jwt=" + response.getAccessToken() + ";Path=/;Domain=http://127.0.0.1:5173/;Max-Age=" +
-                Duration.of(1, ChronoUnit.DAYS).getSeconds() + ";HttpOnly";
+        String value = "jwt=" + response.getAccessToken() + ";Path=/;Domain=localhost;Max-Age=" +
+                Duration.of(1, ChronoUnit.DAYS).getSeconds() + ";HttpOnly;Secure;SameSite=None";
 
         httpServletResponse.setHeader("Set-Cookie", value);
         httpServletResponse.addHeader("Access-Control-Expose-Headers", "Authorization");
