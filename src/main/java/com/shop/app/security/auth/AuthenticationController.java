@@ -1,6 +1,5 @@
 package com.shop.app.security.auth;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +28,20 @@ public class AuthenticationController {
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request,
                                                                 HttpServletResponse httpServletResponse) {
         AuthenticationResponse response = service.authenticate(request);
-        Cookie cookie = new Cookie("Set-Cookie", response.getAccessToken());
+        /*Cookie cookie = new Cookie("Set-Cookie", response.getAccessToken());
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setMaxAge(Duration.of(1, ChronoUnit.DAYS).toSecondsPart());
         cookie.setPath("/");
-        httpServletResponse.addCookie(cookie);
+        httpServletResponse.addCookie(cookie);*/
+        String value = "jwt=" + response.getAccessToken() + ";Path=/;Domain=http://127.0.0.1:5173/;Max-Age=" +
+                Duration.of(1, ChronoUnit.DAYS).getSeconds() + ";HttpOnly";
+
+        httpServletResponse.setHeader("Set-Cookie", value);
+        httpServletResponse.addHeader("Access-Control-Expose-Headers", "Authorization");
+        httpServletResponse.addHeader("Access-Control-Allow-Headers", "Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, X-Custom-header");
+        //httpServletResponse.addHeader(jwtConfig.getAuthorizationHeader(),jwtConfig.getTokenPrefix() + token);
+
         return ResponseEntity.ok(response);
     }
 }
