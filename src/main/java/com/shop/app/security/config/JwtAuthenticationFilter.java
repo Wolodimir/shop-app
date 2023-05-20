@@ -70,8 +70,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String extractJwtFromCookie(String authHeader) {
-        String[] s = authHeader.split(";");
-        String jwt = s[1].substring(5);
+        String[] a = authHeader.split("jwt=");
+        String[] b = a[1].split(";");
+        String jwt = b[0];
+
         return jwt;
     }
 }
