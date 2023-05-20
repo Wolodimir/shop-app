@@ -1,7 +1,13 @@
 package com.shop.app.security.auth;
 
+import com.shop.app.security.error.ResponseError;
+import com.shop.app.security.exception.UserDuplicatedException;
+import com.shop.app.security.exception.UserNotFoundException;
+import com.shop.app.security.user.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,23 +16,32 @@ import java.time.temporal.ChronoUnit;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(allowCredentials = "true", origins = "http://localhost:5173/")
+@CrossOrigin(allowCredentials = "true", origins = "http://127.0.0.1:5173/")
 public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    public AuthenticationController(AuthenticationService service) {
+    private final UserRepository userRepository;
+
+    public AuthenticationController(AuthenticationService service, UserRepository userRepository) {
         this.service = service;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody @Valid RegisterRequest request) {
+        if(userRepository.existsByEmail(request.getEmail()) ) {
+            throw new UserDuplicatedException(HttpStatusCode.valueOf(404),"Пользователь с такой почтой уже существует.");
+        }
         return ResponseEntity.ok(service.register(request));
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request,
                                                                 HttpServletResponse httpServletResponse) {
+        if(!userRepository.existsByEmail(request.getEmail())) {
+            throw new UserNotFoundException(HttpStatus.NOT_FOUND,"Не найдет пользователь с данным email");
+        }
         AuthenticationResponse response = service.authenticate(request);
         /*Cookie cookie = new Cookie("Set-Cookie", response.getAccessToken());
         cookie.setHttpOnly(true);
@@ -44,4 +59,20 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(response);
     }
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseError handleUserNotFoundException(
+            UserNotFoundException exception
+    ) {
+        return new ResponseError("Такого пользователя не существует.",404);
+    }
+
+    @ExceptionHandler(UserDuplicatedException.class)
+    @ResponseStatus(HttpStatus.BAD_GATEWAY)
+    public ResponseError handleUserDuplicatedException(
+            UserDuplicatedException exception
+    ) {
+        return new ResponseError("Пользователь с такой почтой уже существует.",500);
+    }
+
 }
