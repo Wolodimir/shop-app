@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(allowCredentials = "true", origins = "http://127.0.0.1:5173/")
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:5173/")
 public class AuthenticationController {
 
     private final AuthenticationService service;
