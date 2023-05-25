@@ -33,6 +33,19 @@ public class SecurityConfiguration {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .requestMatchers(
+                        "/api/v1/auth/**",
+                        "/v2/api-docs",
+                        "/v3/api-docs",
+                        "/v3/api-docs/**",
+                        "/swagger-resource",
+                        "/swagger-resource/**",
+                        "/configuration/ui",
+                        "/configuration/security",
+                        "swagger-ui/**",
+                        "/webjars/**",
+                        "/swagger-ui.html"
+                ).permitAll()
                 .requestMatchers("/auth/**")
                 .permitAll()
                 .anyRequest()
