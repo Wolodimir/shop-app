@@ -9,6 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
@@ -72,7 +75,18 @@ public class AuthenticationController {
     public ResponseError handleUserDuplicatedException(
             UserDuplicatedException exception
     ) {
-        return new ResponseError("Пользователь с такой почтой уже существует.",500);
+        return new ResponseError("Пользователь с такой почтой уже существует.",400);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseError handleValidationException(
+            MethodArgumentNotValidException exception
+    ) {
+        BindingResult bindingResult = exception.getBindingResult();
+        FieldError fieldError = bindingResult.getFieldError();
+        String defaultMessage = fieldError.getDefaultMessage();
+        return new ResponseError(defaultMessage,400);
     }
 
 }
